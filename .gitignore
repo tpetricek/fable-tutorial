@@ -1,6 +1,6 @@
 \[completed\]
 out
 1-counter/node_modules/**/*
-!1-counter/node_modules/fable-arch
 2-todo/node_modules/**/*
-!2-todo/node_modules/fable-arch
+3-todo-fable-arch/node_modules/**/*
+!3-todo-fable-arch/node_modules/fable-arch

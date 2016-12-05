@@ -1,11 +1,14 @@
 #r "node_modules/fable-core/Fable.Core.dll"
-#load "node_modules/fable-import-virtualdom/Fable.Helpers.Virtualdom.fs"
-#load "elmish.fsx"
+#r "node_modules/fable-arch/Fable.Arch.dll"
+open System
 open Fable.Core
+open Fable.Core.JsInterop
 open Fable.Import
 open Fable.Import.Browser
-open Fable.Helpers
-open Elmish
+open Fable.Arch
+open Fable.Arch.App
+open Fable.Arch.Html
+
 
 // ------------------------------------------------------------------------------------------------
 // Implementing TODO list app with Fable
@@ -38,9 +41,14 @@ open Elmish
 
 type Update =
   | Input of string
+  | Add
+  | Remove of Guid
+
+type Todo =
+  { Id : Guid; Text: string }
 
 type Model =
-  { Input : string }
+  { Input : string; Todos: Todo list }
 
 // ------------------------------------------------------------------------------------------------
 // Given an old state and update event, produce a new state
@@ -48,28 +56,32 @@ type Model =
 
 let update state = function
   | Input s -> { state with Input = s }
+  | Add -> { state with Input = ""; Todos = ({Id = Guid.NewGuid(); Text = state.Input})::state.Todos }
+  | Remove id -> { state with Todos = state.Todos |> List.filter (fun x -> x.Id <> id) }
 
 // ------------------------------------------------------------------------------------------------
 // Render page based on the current state
 // ------------------------------------------------------------------------------------------------
 
-let render trigger state =
-  h?div [] [
-    h?ul [] [
-      h?li [] [
-        text "First work item"
-        h?a ["href" => "#"; "onclick" =!> fun _ -> () ] [ h?span [] [ text "X" ] ]
-      ]
-      h?li [] [
-        text "Second work item"
-        h?a ["href" => "#"; "onclick" =!> fun _ -> () ] [ h?span [] [ text "X" ] ]
-      ]
+let render (state: Model) =
+  div [] [
+    ul [] [
+      for todo in state.Todos do
+        yield
+          li [] [
+            text todo.Text
+            a [
+              property "href" "#"
+              onMouseClick (fun _ -> Remove todo.Id)
+            ] [ span [] [ text "X" ] ]
+          ]
     ]
-    h?input [
-      "value" => state.Input
-      "oninput" =!> fun d -> trigger (Input(unbox d?target?value)) ] []
-    h?button
-      [ ]
+    input [
+      property "value" state.Input
+      onInput (fun d -> Input(unbox d?target?value))
+    ]
+    button
+      [ onMouseClick (fun _ -> Add)]
       [ text "Add" ]
   ]
 
@@ -77,6 +89,12 @@ let render trigger state =
 // Start the application with initial state
 // ------------------------------------------------------------------------------------------------
 
-let initial = { Input = "" }
+let initial =
+  { Input = ""
+    Todos =
+    [{ Id = Guid.NewGuid(); Text = "First work item"}
+     { Id = Guid.NewGuid(); Text = "Second work item"} ] }
 
-app "todo" initial render update
+createSimpleApp initial render update (Virtualdom.createRender)
+|> withStartNodeSelector "#todo"
+|> start

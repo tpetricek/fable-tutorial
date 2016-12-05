@@ -1,11 +1,11 @@
 #r "node_modules/fable-core/Fable.Core.dll"
-#r "node_modules/fable-arch/Fable.Arch.dll"
+#load "node_modules/fable-import-virtualdom/Fable.Helpers.Virtualdom.fs"
+#load "elmish.fsx"
 open Fable.Core
 open Fable.Import
 open Fable.Import.Browser
-open Fable.Arch
-open Fable.Arch.App
-open Fable.Arch.Html
+open Fable.Helpers
+open Elmish
 
 // ------------------------------------------------------------------------------------------------
 // Introducing Elm-style architecture with Fable
@@ -43,14 +43,14 @@ let update state = function
 // Render page based on the current state
 // ------------------------------------------------------------------------------------------------
 
-let render state =
-  div [] [
-    p [] [ text (string state.Count) ]
-    button
-      [ onMouseClick (fun _ -> Increment) ]
+let render trigger state =
+  h?div [] [
+    h?p [] [ text (string state.Count) ]
+    h?button
+      [ yield "onclick" =!> fun _ -> trigger Increment ]
       [ text "+1" ]
-    button
-      [ onMouseClick (fun _ -> Decrement) ]
+    h?button
+      [ yield "onclick" =!> fun _ -> trigger Decrement ]
       [ text "-1" ]
   ]
 
@@ -61,6 +61,4 @@ let render state =
 let initial =
   { Count = 0 }
 
-createSimpleApp initial render update (Virtualdom.createRender)
-|> withStartNodeSelector "#counter"
-|> start
+app "counter" initial render update
