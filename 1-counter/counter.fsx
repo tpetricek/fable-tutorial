@@ -1,17 +1,17 @@
 #r "node_modules/fable-core/Fable.Core.dll"
-#load "node_modules/fable-import-virtualdom/Fable.Helpers.Virtualdom.fs"
-#load "elmish.fsx"
+#r "node_modules/fable-arch/Fable.Arch.dll"
 open Fable.Core
 open Fable.Import
 open Fable.Import.Browser
-open Fable.Helpers
-open Elmish
+open Fable.Arch
+open Fable.Arch.App
+open Fable.Arch.Html
 
 // ------------------------------------------------------------------------------------------------
 // Introducing Elm-style architecture with Fable
 // ------------------------------------------------------------------------------------------------
 
-// TODO #1: Look at the sample below. Check what kind of events are there 
+// TODO #1: Look at the sample below. Check what kind of events are there
 // (this is the `Update` type), what do we store in the `Model` and look
 // at the type signatures of `update` and `render` to understand things!
 
@@ -24,11 +24,11 @@ open Elmish
 // Domain model - update events and application state
 // ------------------------------------------------------------------------------------------------
 
-type Update = 
+type Update =
   | Increment
   | Decrement
 
-type Model = 
+type Model =
   { Count : int }
 
 // ------------------------------------------------------------------------------------------------
@@ -43,14 +43,14 @@ let update state = function
 // Render page based on the current state
 // ------------------------------------------------------------------------------------------------
 
-let render trigger state =
-  h?div [] [
-    h?p [] [ text (string state.Count) ]
-    h?button 
-      [ yield "onclick" =!> fun _ -> trigger Increment ] 
+let render state =
+  div [] [
+    p [] [ text (string state.Count) ]
+    button
+      [ onMouseClick (fun _ -> Increment) ]
       [ text "+1" ]
-    h?button 
-      [ yield "onclick" =!> fun _ -> trigger Decrement ] 
+    button
+      [ onMouseClick (fun _ -> Decrement) ]
       [ text "-1" ]
   ]
 
@@ -58,7 +58,9 @@ let render trigger state =
 // Start the application with initial state
 // ------------------------------------------------------------------------------------------------
 
-let initial = 
+let initial =
   { Count = 0 }
 
-app "counter" initial render update
+createSimpleApp initial render update (Virtualdom.createRender)
+|> withStartNodeSelector "#counter"
+|> start

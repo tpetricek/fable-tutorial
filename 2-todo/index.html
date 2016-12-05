@@ -6,16 +6,16 @@
     section {
       margin:50px auto 0px auto;
       width:400px;
-      font:normal 16pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font:normal 16pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     h1 {
-      font:normal 24pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font:normal 24pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin-bottom:40px;
     }
     input, button {
-      font:normal 14pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font:normal 14pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    ul { 
+    ul {
       margin:0px;
       padding:0px;
     }
@@ -40,8 +40,8 @@
     li input:checked {
       background:#4597EF;
     }
-    li a { 
-      float:right; 
+    li a {
+      float:right;
       background:#4597EF;
       border-radius:12px;
       width:24px;
@@ -85,16 +85,6 @@
   </section>
 
   <script src="node_modules/core-js/client/core.min.js"></script>
-  <script src="node_modules/requirejs/require.js"></script>
-  <script>
-    requirejs.config({
-        baseUrl: 'out',
-        paths: {
-          'fable-core': '../node_modules/fable-core/fable-core.min',
-          'virtual-dom': '../lib/virtual-dom'
-        }
-    });
-    requirejs(["todo"]);
-  </script>
+  <script src="out/bundle.js"></script>
 </body>
 </html>

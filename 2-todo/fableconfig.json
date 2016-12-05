@@ -1,8 +1,14 @@
 {
-    "module": "amd",
     "sourceMaps": true,
     "projFile": "./todo.fsx",
     "outDir": "out",
-    "scripts": {
+    "rollup": {
+        "plugins": [
+            ["commonjs", {
+                "namedExports": {
+                    "virtual-dom": [ "h", "create", "diff", "patch" ]
+                }
+            }]
+        ]
     }
 }
