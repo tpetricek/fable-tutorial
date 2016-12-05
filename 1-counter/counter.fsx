@@ -11,7 +11,7 @@ open Elmish
 // Introducing Elm-style architecture with Fable
 // ------------------------------------------------------------------------------------------------
 
-// TODO #1: Look at the sample below. Check what kind of events are there 
+// TODO #1: Look at the sample below. Check what kind of events are there
 // (this is the `Update` type), what do we store in the `Model` and look
 // at the type signatures of `update` and `render` to understand things!
 
@@ -24,11 +24,11 @@ open Elmish
 // Domain model - update events and application state
 // ------------------------------------------------------------------------------------------------
 
-type Update = 
+type Update =
   | Increment
   | Decrement
 
-type Model = 
+type Model =
   { Count : int }
 
 // ------------------------------------------------------------------------------------------------
@@ -46,11 +46,11 @@ let update state = function
 let render trigger state =
   h?div [] [
     h?p [] [ text (string state.Count) ]
-    h?button 
-      [ yield "onclick" =!> fun _ -> trigger Increment ] 
+    h?button
+      [ yield "onclick" =!> fun _ -> trigger Increment ]
       [ text "+1" ]
-    h?button 
-      [ yield "onclick" =!> fun _ -> trigger Decrement ] 
+    h?button
+      [ yield "onclick" =!> fun _ -> trigger Decrement ]
       [ text "-1" ]
   ]
 
@@ -58,7 +58,7 @@ let render trigger state =
 // Start the application with initial state
 // ------------------------------------------------------------------------------------------------
 
-let initial = 
+let initial =
   { Count = 0 }
 
 app "counter" initial render update

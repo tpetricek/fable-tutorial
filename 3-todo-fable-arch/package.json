@@ -12,11 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "core-js": "2.4.0",
+    "fable-arch": "^0.10.0-alpha.1",
     "fable-core": "^0.7.14",
     "virtual-dom": "^2.1.1"
   },
   "devDependencies": {
-    "fable-compiler": "^0.7.18",
-    "fable-import-virtualdom": "^0.8.1"
+    "fable-compiler": "^0.7.18"
   }
 }
