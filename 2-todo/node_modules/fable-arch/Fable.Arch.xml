@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>Fable.Arch</name></assembly>
+<members>
+<member name="M:Fable.Arch.Html.Attributes.classBaseList``1(System.String,System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.Boolean}})">
+<summary>
+ Helper to build space separated class with a static part
+</summary>
+</member>
+<member name="M:Fable.Arch.Html.Attributes.classList``1(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.Boolean}})">
+<summary>
+ Helper to build space separated class
+</summary>
+</member>
+<member name="M:Fable.Arch.Html.Attributes.classy``1(System.String)">
+<summary>
+ class attribute helper
+</summary>
+</member>
+<member name="T:Fable.Arch.Html.Types.DomNode`1.WhiteSpace">
+<summary>
+ Whitespace for formatting
+</summary>
+</member>
+<member name="T:Fable.Arch.Html.Types.DomNode`1.Text">
+<summary>
+ A text value for a node
+</summary>
+</member>
+<member name="T:Fable.Arch.Html.Types.DomNode`1.VoidElement">
+<summary>
+ A void element is one that can&apos;t have content, like link, br, hr, meta
+ See: https://dev.w3.org/html5/html-author/#void
+</summary>
+</member>
+<member name="T:Fable.Arch.Html.Types.DomNode`1.Element">
+<summary>
+ A regular html element that can contain a list of other nodes
+</summary>
+</member>
+<member name="T:Fable.Arch.Html.Types.VoidElement`1">
+<summary>
+ A Node in Html have the following forms
+</summary>
+</member>
+</members>
+</doc>
