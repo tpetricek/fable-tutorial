@@ -1,0 +1,56 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+  <style>
+    section {
+      margin:50px auto 0px auto;
+      width:400px;
+      font:normal 16pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    }
+    h1 {
+      font:normal 24pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      margin-bottom:40px;
+    }
+    button {
+      font:normal 14pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    }
+    p {
+      border:solid 2px #4597EF;
+      padding:8px;
+      margin:0px 0px 10px 0px;
+      background:#D0E1F2;
+    }
+    button {
+      float:right;
+      width:80px;
+      padding:8px;
+      margin-left:10px;
+      background:#4597EF;
+      border:solid 2px #4597EF;
+      color:white;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1><strong>Counter</strong>, The Ultimate</h1>
+    <div id="counter">
+    </div>
+  </section>
+
+  <script src="node_modules/core-js/client/core.min.js"></script>
+  <script src="node_modules/requirejs/require.js"></script>
+  <script>
+    requirejs.config({
+        baseUrl: 'out',
+        paths: {
+          'fable-core': '../node_modules/fable-core/fable-core.min',
+          'virtual-dom': '../lib/virtual-dom'
+        }
+    });
+    requirejs(["todo"]);
+  </script>
+</body>
+</html>
