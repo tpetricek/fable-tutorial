@@ -32,6 +32,12 @@ open Elmish
 // the `X` button is clicked, trigger a new event `Remove(id)`. Then you
 // just need to change the `update` function to remove the item from the list!
 
+// BONUS: If you have more time, you can add support for marking items
+// as completed - every item can be complete or incomplete and clicking 
+// on an item should swich the stats (use "class" => "done" to strike-through
+// completed items). You can also add a view option for showing only 
+// complete/incomplete items.
+
 // ------------------------------------------------------------------------------------------------
 // Domain model - update events and application state
 // ------------------------------------------------------------------------------------------------
@@ -56,7 +62,7 @@ let update state = function
 let render trigger state =
   h?div [] [
     h?ul [] [
-      h?li [] [
+      h?li ["class" => "done"] [
         text "First work item"
         h?a ["href" => "#"; "onclick" =!> fun _ -> () ] [ h?span [] [ text "X" ] ]
       ]

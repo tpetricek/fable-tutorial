@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+  <style type="text/css">
+    .panel {
+      text-align:center;
+      padding:20px 0px 30px 0px;
+    }
+    .panel button {
+      font:normal 14pt 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;      
+      padding:8px;
+      min-width:120px;
+      background:#4597EF;
+      border:solid 2px #4597EF;
+      color:white;
+      cursor:pointer;      
+      margin:0px 5px 0px 5px;
+    }
+    #circ, #rect {
+      background:#45A097;
+      border-color:#45A097;
+    }
+    body { 
+      background:#181818;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <button id="reset">Reset</button>
+    <button id="rnd">Random color</button>
+    <button id="circ">Circles</button>
+    <button id="rect">Rectangles</button>
+  </div>  
+  <canvas align="center" id="canvas" width="1000" height="1000"></canvas>
+  <script src="out/bundle.js"></script>
+</body>
+</html>

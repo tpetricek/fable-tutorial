@@ -60,7 +60,9 @@ type Dynamic() =
   static member (?) (d:Dynamic, s:string) : Dynamic = getProperty d s
 
 let text s = Text(s)
-let (=>) k v = k, Property(v)
+let (=>) k v = 
+  if k = "class" then k, Attribute(v)
+  else k, Property(v)
 let (=!>) k f = k, EventHandler(fun o -> f (unbox<Dynamic> o))
 
 type El() = 
@@ -90,4 +92,3 @@ let app id initial r u =
   
   handleEvent None
   event.Publish.Add(Some >> handleEvent)
-

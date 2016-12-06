@@ -1,0 +1,6 @@
+{
+    "projFile": "./client.fsx",
+    "rollup": {
+        "dest": "./out/bundle.js"
+    }    
+}
