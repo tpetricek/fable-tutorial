@@ -55,9 +55,14 @@ type Model =
 // ------------------------------------------------------------------------------------------------
 
 let update state = function
-  | Input s -> { state with Input = s }
-  | Add -> { state with Input = ""; Todos = ({Id = Guid.NewGuid(); Text = state.Input})::state.Todos }
-  | Remove id -> { state with Todos = state.Todos |> List.filter (fun x -> x.Id <> id) }
+  | Input s -> 
+      { state with Input = s }
+  | Add -> 
+      let todo = { Id = Guid.NewGuid(); Text = state.Input }
+      { state with Input = ""; Todos = todo::state.Todos }
+  | Remove id -> 
+      let filtered = state.Todos |> List.filter (fun x -> x.Id <> id)
+      { state with Todos = filtered }
 
 // ------------------------------------------------------------------------------------------------
 // Render page based on the current state
@@ -66,15 +71,14 @@ let update state = function
 let render (state: Model) =
   div [] [
     ul [] [
-      for todo in state.Todos do
-        yield
-          li [] [
-            text todo.Text
-            a [
-              property "href" "#"
-              onMouseClick (fun _ -> Remove todo.Id)
-            ] [ span [] [ text "X" ] ]
-          ]
+      for todo in state.Todos ->
+        li [] [
+          text todo.Text
+          a [
+            property "href" "#"
+            onMouseClick (fun _ -> Remove todo.Id)
+          ] [ span [] [ text "X" ] ]
+        ]
     ]
     input [
       property "value" state.Input
@@ -92,8 +96,8 @@ let render (state: Model) =
 let initial =
   { Input = ""
     Todos =
-    [{ Id = Guid.NewGuid(); Text = "First work item"}
-     { Id = Guid.NewGuid(); Text = "Second work item"} ] }
+    [ { Id = Guid.NewGuid(); Text = "First work item"}
+      { Id = Guid.NewGuid(); Text = "Second work item"} ] }
 
 createSimpleApp initial render update (Virtualdom.createRender)
 |> withStartNodeSelector "#todo"
