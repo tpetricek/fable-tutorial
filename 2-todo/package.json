@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "node node_modules/.bin/fable",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prebuild": "npm install",
+    "build": "node node_modules/fable-compiler -w"
   },
   "keywords": [],
   "author": "Tomas Jansson",
