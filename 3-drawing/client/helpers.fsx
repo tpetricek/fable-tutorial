@@ -32,8 +32,7 @@ module Async =
   /// given element and return the event object casted to 'T
   let AwaitDomEvent<'T>(el:HTMLElement, event) =
     Async.FromContinuations(fun (cont, _, _) ->
-      let mutable listener = EventListener(ignore)
-      listener <- EventListener(fun e ->
+      let rec listener = EventListener(fun e ->
         el.removeEventListener(event, U2.Case1 listener)
         cont(unbox<'T> e) )
       el.addEventListener(event, U2.Case1 listener) )
